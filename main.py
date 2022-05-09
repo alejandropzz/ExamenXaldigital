@@ -1,5 +1,6 @@
 import requests
 
+#Funcion para obtener los datos
 def obtenerDatos():
     liga="https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=perl&site=stackoverflow"
     datos = requests.get(url=liga, params={}).json()
@@ -9,6 +10,7 @@ def obtenerDatos():
         items=datos["items"]
     return items
 
+#Funcion para obtener los valores (contestadas, no contestadas, etc)
 def procesarDatos(datos):
     contestadas=0
     noContestadas=0
@@ -24,6 +26,8 @@ def procesarDatos(datos):
         item=datos[i]
         itemIncompleto=False
 
+
+        #En esta parte se hace las validaciones y los calculos
         if("is_answered" in item):
             if(item["is_answered"]==True):
                 contestadas=contestadas+1
@@ -77,19 +81,18 @@ def procesarDatos(datos):
 
     return respuesta
 
+#Funcion para imprimir las respuestas
 def imprimirRespuesta(respuesta):
     llaves = respuesta.keys()
     for k in llaves:
         print(k, ":", respuesta[k],"\n")
 
 
+#Funcion principal
 def main():
     datos=obtenerDatos()
     respuesta=procesarDatos(datos)
     imprimirRespuesta(respuesta)
-
-
-
 
 
 main()
