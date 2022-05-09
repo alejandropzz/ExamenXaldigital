@@ -1,0 +1,8 @@
+SELECT Nombre_aeropuerto,  (total) AS "Movimientos" FROM (SELECT COUNT(vuelos.id_aeropuerto) as "total",aeropuertos.nombre_aeropuerto as "Nombre_aeropuerto"  FROM aeropuertos INNER JOIN vuelos on aeropuertos.id_aeropuerto = vuelos.id_aeropuerto where YEAR(vuelos.dia)=2021 group by vuelos.id_aeropuerto) sumas  ORDER BY Movimientos DESC LIMIT 1
+
+SELECT Nombre_aerolinea,  (total) AS "Movimientos" FROM (SELECT COUNT(vuelos.id_aerolinea) as "total",aerolinea.nombre_aerolinea as "Nombre_aerolinea"  FROM aerolinea INNER JOIN vuelos on aerolinea.id_aerolinea = vuelos.id_aerolinea where YEAR(vuelos.dia)=2021 group by vuelos.id_aerolinea) sumas  ORDER BY Movimientos DESC LIMIT 1
+
+SELECT dia AS "Fecha", COUNT(dia) AS "Vuelos totales" FROM vuelos GROUP BY dia  LIMIT 1
+
+
+
